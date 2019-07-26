@@ -1,0 +1,83 @@
+// n is number of stars required
+@function multiple-box-shadow ($n){
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'
+  }
+  @return unquote($value)
+}
+
+$shadows-small:  multiple-box-shadow(1500);
+$shadows-medium: multiple-box-shadow(300);
+$shadows-big:    multiple-box-shadow(200);
+
+#pg404_background-404 {
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+@mixin starPopulation($size, $box-shadow, $animation-speed) {
+  width: $size;
+  height: $size;
+  background: transparent;
+  box-shadow: $box-shadow;
+  top: 2000px;
+  animation: animStar $animation-speed linear infinite;
+}
+
+#pg404_stars1 {
+  @include starPopulation(1px, $shadows-small, 150s);
+}
+#pg404_stars2 {
+  @include starPopulation(2px, $shadows-medium, 110s);
+}
+#pg404_stars3 {
+  @include starPopulation(3px, $shadows-big, 90s);
+}
+
+#pg404_title {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  
+  color: #FFF;
+  text-align: center;
+  font-family: 'Kingfisher-Regular', sans-serif;
+   
+  span {
+    background: -webkit-linear-gradient(white, #38495a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.pg404_text-big {
+  font-weight: 700;
+  font-size: 60px;
+  letter-spacing: 5px;
+}
+.pg404_text-small {
+  font-weight: 100;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.pg404_text-404 {
+  line-height: 210px;
+  font-weight: 900;
+  font-size: 202px;
+  letter-spacing: 2px;
+}
+
+@keyframes animStar{
+  from {
+    transform: translateY(0px);
+  }
+  to	{
+    transform: translateY(-2000px)};
+  }
